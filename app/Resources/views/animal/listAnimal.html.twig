@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% for animal in animals %}
+
+<p>Name: {{animal.username}}</p>
+<pre>Age: {{animal.age}} Breed: {{animal.breed}} Food:{{animal.food}} cropNumber: {{animal.cropNumber}}
+</pre>
+</p>
+
+{% endfor %}
+    
+{% endblock %}
+
+
+{% block stylesheets %}
+
+
+
+
+
+{% endblock %}
