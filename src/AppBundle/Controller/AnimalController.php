@@ -65,14 +65,28 @@ class AnimalController extends Controller
 
     }
 
-    // /**
-    //  * @Route("addAnimal", name="addAnimal")
-    //  */
-    public function addAnimalAction($id)
+    /**
+     * @Route("/listAllAnimal/", name="listAllAnimal")
+     */
+    public function listAllAnimalAction()
     {
         $animals = $this->getDoctrine()->getRepository('AppBundle:Animal')->findAll();
-        
-        return $this->render('animal/addAnimal.html.twig', ['animals' => $animals]) ;
+        return $this->render('animal/listAllAnimal.html.twig', ['animals' => $animals]) ;
+    }
+
+    /**
+     * @Route("/addAnimal/{id}", name="addAnimal")
+     */
+    public function addAnimalAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $animal = $em->getRepository('AppBundle:Animal')->find($id);
+
+        $cropNumber = $this->getUser()->getCropNumber();
+
+        //set cropNumber of animal to cropNumber user
+       // $animal->setCropNumber($setCropNumber);
+        return $this->redirectToRoute('listAnimal');
 
     }
 
