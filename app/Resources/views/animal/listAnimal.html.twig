@@ -5,19 +5,16 @@
 {% for animal in animals %}
 
 <p>Name: {{animal.username}}</p>
-<pre>Age: {{animal.age}} Breed: {{animal.breed}} Food:{{animal.food}} cropNumber: {{animal.cropNumber}}
+<pre>Family:{{animal.family}} Age: {{animal.age}} Breed: {{animal.breed}} Food:{{animal.food}} cropNumber: {{animal.cropNumber}} Gender: {{animal.gender}} <a href="removeAnimal/{{animal.id}}" class="btn btn-danger">Delete</a>
 </pre>
-</p>
 
 {% endfor %}
+
+<p><a href="/logout">Logout</a> <a href="animal/add" class="btn btn-default">Add</a> </p>
     
 {% endblock %}
 
-
 {% block stylesheets %}
-
-
-
 
 
 {% endblock %}

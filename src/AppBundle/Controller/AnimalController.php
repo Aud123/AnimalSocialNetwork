@@ -38,32 +38,27 @@ class AnimalController extends Controller
 
         // dump($this->getUser()->getCropNumber());
         // die;
+
         $cropNumber = $this->getUser()->getCropNumber();
         $animals = $this->getDoctrine()->getRepository('AppBundle:Animal')->findBy(array('cropNumber' => $cropNumber));
             
         return $this->render('animal/listAnimal.html.twig', ['animals' => $animals]) ;
     }
 
-     /**
-     * @Route("/editAnimal/{id}", name="editAnimal")
+    /**
+     * @Route("removeAnimal/{$id}", name="removeAnimal")
      */
-    public function editAnimalAction($id, Request $request)
+    public function removeAnimalAction($id)
     {
-        return $this->render('animal/editAnimal.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);
+
+        $em = $this->getDoctrine()->getManager();
+        $animal = $em->getRepository('AppBundle:Animal')->find($id);
+   
+        $em->remove($animal);
+        $em->flush();
+
+        return $this->redirectToRoute('listAnimal');
+
     }
-
-           /**
-     * @Route("/detailsAnimal/{id }", name="detailsAnimal")
-     */
-    public function detailsAnimalAction($id, Request $request)
-    {
-        return $this->render('animal/detailsAnimal.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);
-    }
-
-
 
 }

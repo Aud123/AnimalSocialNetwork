@@ -38,6 +38,10 @@ class Animal extends BaseUser
      * @ORM\Column(type="string")
      */
     protected $cropNumber;
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $gender;
 
     public function __construct()
     {
@@ -211,5 +215,29 @@ class Animal extends BaseUser
     public function getCropNumber()
     {
         return $this->cropNumber;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param string $gender
+     *
+     * @return Animal
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 }
