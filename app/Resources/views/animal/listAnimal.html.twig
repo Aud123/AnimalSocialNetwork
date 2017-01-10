@@ -1,14 +1,43 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+
+{% for animal in animals %}
+
+{% if animal.username == app.user %}
+<h2>Welcome <span>{{animal.username}} </span></h2>
+<pre>Family:{{animal.family}} Age: {{animal.age}} Breed: {{animal.breed}} Food:{{animal.food}} cropNumber: {{animal.cropNumber}} Gender: {{animal.gender}} </pre>
+{% endif %}
+
+
+{% endfor %}
+
+<h2> Your animal friends: </h2>
+
+
+{% endblock %}
+
+
+
 {% block body %}
 
 {% for animal in animals %}
 
+{% if animal.username == app.user %}
+
+
+
+{% else %}
+
 <p>Name: {{animal.username}}</p>
-<pre>Family:{{animal.family}} Age: {{animal.age}} Breed: {{animal.breed}} Food:{{animal.food}} cropNumber: {{animal.cropNumber}} Gender: {{animal.gender}} <a href="removeAnimal/{{animal.id}}" class="btn btn-danger">Delete</a>
-</pre>
+<pre>Family:{{animal.family}} Age: {{animal.age}} Breed: {{animal.breed}} Food:{{animal.food}} cropNumber: {{animal.cropNumber}} Gender: {{animal.gender}} <a href="removeAnimal/{{animal.id}}" class="btn btn-danger">Delete</a> </pre>
+{% endif %}
+
+
 
 {% endfor %}
+
+
 
 <p><a href="/logout">Logout</a> <a href="animal/add" class="btn btn-default">Add</a> </p>
     

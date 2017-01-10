@@ -40,25 +40,46 @@ class AnimalController extends Controller
         // die;
 
         $cropNumber = $this->getUser()->getCropNumber();
+        // dump($this->getUser());
+        // dump($cropNumber);
+        // die;
         $animals = $this->getDoctrine()->getRepository('AppBundle:Animal')->findBy(array('cropNumber' => $cropNumber));
             
         return $this->render('animal/listAnimal.html.twig', ['animals' => $animals]) ;
     }
 
     /**
-     * @Route("removeAnimal/{$id}", name="removeAnimal")
+     * @Route("removeAnimal/{id}", name="removeAnimal")
      */
     public function removeAnimalAction($id)
     {
-
         $em = $this->getDoctrine()->getManager();
         $animal = $em->getRepository('AppBundle:Animal')->find($id);
    
         $em->remove($animal);
         $em->flush();
 
+        $this->addFlash('notice', 'animal removed');
+
         return $this->redirectToRoute('listAnimal');
 
     }
+
+    // /**
+    //  * @Route("addAnimal", name="addAnimal")
+    //  */
+    // public function addAnimalAction($id)
+    // {
+    //     $em = $this->getDoctrine()->getManager();
+    //     $animal = $em->getRepository('AppBundle:Animal')->find($id);
+   
+    //     $em->remove($animal);
+    //     $em->flush();
+
+    //     $this->addFlash('notice', 'animal removed');
+
+    //     return $this->redirectToRoute('listAnimal');
+
+    // }
 
 }
