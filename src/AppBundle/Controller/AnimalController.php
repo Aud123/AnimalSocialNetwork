@@ -68,18 +68,12 @@ class AnimalController extends Controller
     // /**
     //  * @Route("addAnimal", name="addAnimal")
     //  */
-    // public function addAnimalAction($id)
-    // {
-    //     $em = $this->getDoctrine()->getManager();
-    //     $animal = $em->getRepository('AppBundle:Animal')->find($id);
-   
-    //     $em->remove($animal);
-    //     $em->flush();
+    public function addAnimalAction($id)
+    {
+        $animals = $this->getDoctrine()->getRepository('AppBundle:Animal')->findAll();
+        
+        return $this->render('animal/addAnimal.html.twig', ['animals' => $animals]) ;
 
-    //     $this->addFlash('notice', 'animal removed');
-
-    //     return $this->redirectToRoute('listAnimal');
-
-    // }
+    }
 
 }
